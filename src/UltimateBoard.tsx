@@ -3,7 +3,7 @@ import Board from './Board';
 import { SquareValue, BoardState } from './Types';
 import { useEffect } from 'react';
 
-const calculateWinner = (squares: SquareValue[]): BoardState => {
+const calculateWinner = (items: (SquareValue | BoardState)[]): BoardState => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -17,39 +17,13 @@ const calculateWinner = (squares: SquareValue[]): BoardState => {
   
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+    if (items[a] && items[a] === items[b] && items[a] === items[c]) {
+      return items[a];
     }
   }
   
   // Check for draw
-  if (squares.every((square) => square !== null)) {
-    return 'DRAW';
-  }
-  
-  return null;
-};
-
-const calculateUltimateWinner = (boards: BoardState[]): BoardState => {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (boards[a] && boards[a] === boards[b] && boards[a] === boards[c]) {
-      return boards[a];
-    }
-  }
-  
-  // Check if all boards are filled (indicating a draw)
-  if (boards.every((state) => state !== null)) {
+  if (items.every((item) => item !== null)) {
     return 'DRAW';
   }
   
@@ -101,7 +75,8 @@ const UltimateBoard: React.FC = () => {
     setNextBoard(newNextBoard);
   
     // Check for ultimate winner
-    const ultimateWin = calculateUltimateWinner(newBoardStates);
+    // const ultimateWin = calculateUltimateWinner(newBoardStates);
+    const ultimateWin = calculateWinner(newBoardStates);
     if (ultimateWin) {
       setUltimateWinner(ultimateWin);
       return; // No need to change turns if the game is over
@@ -185,6 +160,7 @@ const UltimateBoard: React.FC = () => {
     setNextBoard(null);
     setXIsNext(true);
     setUltimateWinner(null);
+    setSelectedBoard(null);
   };
 
   return (
