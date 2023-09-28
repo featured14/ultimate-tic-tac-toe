@@ -1,3 +1,10 @@
+body{
+  height: 100vh;
+  width: 100vh;
+  background-image: url('../public/game-bg-2560x1440px.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .row {
   display: flex;
 }
@@ -5,14 +12,15 @@
 .board {
   display: flex;
   flex-wrap: wrap;
-  width: 300px;
+  width: 240px;
   margin: 10px;
 }
 
 .square {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   font-size: 24px;
+  background: transparent;
 }
 
 .ultimate-board {
