@@ -164,6 +164,7 @@ const UltimateBoard: React.FC = () => {
   };
 
   return (
+    <div className="content-wrapper">
     <div className="ultimate-board">
       <div className="status-bar">
         <div className="player-turn">
@@ -179,6 +180,7 @@ const UltimateBoard: React.FC = () => {
       <div className="row">{[0, 1, 2].map(renderBoard)}</div>
       <div className="row">{[3, 4, 5].map(renderBoard)}</div>
       <div className="row">{[6, 7, 8].map(renderBoard)}</div>
+    </div>
     </div>
   );
 };
