@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import UltimateBoard from './UltimateBoard';
 import reportWebVitals from './reportWebVitals';
+import WelcomePage from './WelcomePage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <UltimateBoard />
+    <WelcomePage/>
   </React.StrictMode>
 );
 
