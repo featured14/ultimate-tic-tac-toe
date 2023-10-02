@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import UltimateBoard from "./UltimateBoard";
+import PlayersSelectPage from "./PlayersSelectPage";
 
 const WelcomePage = () => {
-  const [startGame, setStartGame] = useState(false);
+  const [nextPage, setNextPage] = useState(false);
 
   useEffect(() => {
     const handleKeyPress = () => {
       // Check if any key is pressed (you can specify a particular key if needed)
-      setStartGame(true);
+      setNextPage(true);
     };
 
     // Add the event listener when the component mounts
@@ -22,7 +23,7 @@ const WelcomePage = () => {
 
   return (
     <div className="content-wrapper">
-      {!startGame&& 
+      {!nextPage && 
         <div className="welcome-page-wrapper">
           <div className="welcome-text">
             <h1 className="title">Welcome to Tic-Tac-TOH, <br />a thrilling twist on the classic game.</h1>
@@ -54,7 +55,7 @@ const WelcomePage = () => {
           </div>
         </div>
       }
-      {startGame && <UltimateBoard />}
+      {nextPage && <PlayersSelectPage />}
   </div>
   );
 };
