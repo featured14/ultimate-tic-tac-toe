@@ -38,7 +38,7 @@ body{
   height: 100px;
   font-size: 24px;
   background: transparent;
-  border: 2px solid #f65b46;
+  border: 2px solid #9A96A0;
 }
 
 .ultimate-board {
@@ -59,17 +59,17 @@ body{
 }
 
 .player-turn {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #f65b46;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
   position: absolute;
   top: 20px;
   right: 28px;
 }
 
 .active-board {
-  border: 8px solid #40f3fe;
+  background: rgba(29, 255, 119, 0.31);
 } 
 
 .status-bar {
@@ -274,4 +274,12 @@ body{
 .game-start-timer{
   margin-bottom: 85px;
   color:  #fff;
+}
+
+/* Ultimate Board */
+.player-logo-square{
+  width: 85px;
+  height: 95px;
+  background-size: contain;
+  margin-left:12px;
 }
