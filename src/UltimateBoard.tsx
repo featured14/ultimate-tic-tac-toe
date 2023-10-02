@@ -166,9 +166,9 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
   return (
     <div className="ultimate-board">
       <div className="status-bar">
-        <div className="player-turn">
-          Next player: {xIsNext ? 'X' : 'O'}
-        </div>
+        <h1 className="player-turn">
+         Player {xIsNext? 1 : 2} <div className={`player-logo-square ${xIsNext? player1 : player2}`}></div>
+        </h1>
         {ultimateWinner && (
           <div className="winner-message">
             Winner is: {ultimateWinner === 'DRAW' ? 'DRAW' : ultimateWinner}
