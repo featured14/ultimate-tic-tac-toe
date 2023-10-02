@@ -18,7 +18,7 @@ body{
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-
+  justify-content: center;
 }
 
 .row {
@@ -30,7 +30,54 @@ body{
   flex-wrap: wrap;
   width: 300px;
   margin: 2px;
-  border: 8px solid transparent;
+}
+
+.board-0{
+  border-right: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+}
+
+.board-1{
+  border-left:  3px solid #fff;
+  border-right: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+}
+
+.board-2{
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+}
+
+.board-3{
+  border-top: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  border-right: 3px solid #fff;
+}
+
+.board-4{
+  border: 3px solid #fff;
+}
+
+.board-5{
+  border-top: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  border-left: 3px solid #fff;
+}
+
+.board-6{
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+}
+
+.board-7{
+  border-top: 3px solid #fff;
+  border-left: 3px solid #fff;
+  border-right: 3px solid #fff;
+}
+
+.board-8{
+  border-top: 3px solid #fff;
+  border-left: 3px solid #fff;
 }
 
 .square {
@@ -49,7 +96,6 @@ body{
 }
 
 .highlight {
-  border: 8px solid #40f3fe;
   box-shadow: 0px 60px 80px 0px rgba(0,0,0,0.6), 32px -25px 32px -4px rgba(0,0,0,0.14);
 }
 
@@ -60,7 +106,7 @@ body{
 
 .player-turn {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   color: #fff;
   position: absolute;
@@ -125,7 +171,7 @@ body{
 /* Welcome page */
 .welcome-page-wrapper{
   max-width: 55%;
-  margin: 70px auto;
+  margin: 50px auto;
 
   .welcome-text{
     display: flex;
@@ -182,7 +228,9 @@ body{
 }
 
 .js-logo{
-  background: url('../images/JS.png'), transparent 50% / cover;
+  background-image: url('../images/JS.png');
+  background-size: cover;
+  background-color: transparent;
   background-repeat: no-repeat;
 }
 
@@ -192,7 +240,9 @@ body{
 }
 
 .ts-logo{
-  background: url('../images/typescript.png'), transparent 50% / cover;
+  background-image: url('../images/typescript.png');
+  background-size: cover;
+  background-color: transparent;
   background-repeat: no-repeat;
 }
 
@@ -202,7 +252,9 @@ body{
 }
 
 .react-logo{
-  background: url('../images/react.png'), transparent 50% / cover;
+  background-image: url('../images/react.png');
+  background-size: cover;
+  background-color: transparent;
   background-repeat: no-repeat;
 }
 
@@ -212,7 +264,9 @@ body{
 }
 
 .svelte-logo{
-  background: url('../images/svelte.png'), transparent 50% / cover;
+  background-image: url('../images/svelte.png');
+  background-size: cover;
+  background-color: transparent;
   background-repeat: no-repeat;
 }
 
@@ -222,7 +276,9 @@ body{
 }
 
 .angular-logo{
-  background: url('../images/angularjs.png'), transparent 50% / cover ;
+  background-image: url('../images/angularjs.png');
+  background-size: cover;
+  background-color: transparent;
   background-repeat: no-repeat;
 }
 
@@ -232,7 +288,9 @@ body{
 }
 
 .vue-logo{
-  background: url('../images/vue.png'), transparent 50% / cover;
+  background-image: url('../images/vue.png');
+  background-size: cover;
+  background-color: transparent;
   background-repeat: no-repeat;
 }
 
@@ -242,7 +300,9 @@ body{
 }
 
 .aurelia-logo{
-  background: url('../images/aurelia.png'), transparent 50% / cover ;
+  background-image: url('../images/aurelia.png');
+  background-size: cover;
+  background-color: transparent;
   background-repeat: no-repeat;
 }
 
@@ -252,7 +312,9 @@ body{
 }
 
 .node-logo{
-  background: url('../images/node-js.png'), transparent 50% / cover;
+  background-image: url('../images/node-js.png');
+  background-size: cover;
+  background-color: transparent;
   background-repeat: no-repeat;
 }
 
@@ -262,7 +324,9 @@ body{
 }
 
 .ember-logo{
-  background: url('../images/ember.png'), transparent 50% / cover;
+  background-image: url('../images/ember.png');
+  background-size: cover;
+  background-color: transparent;
   background-repeat: no-repeat;
 }
 
@@ -272,14 +336,20 @@ body{
 }
 
 .game-start-timer{
-  margin-bottom: 85px;
+  position: absolute;
+  bottom: 70px;
   color:  #fff;
 }
 
 /* Ultimate Board */
 .player-logo-square{
-  width: 85px;
-  height: 95px;
+  width: 110px;
+  height: 110px;
   background-size: contain;
   margin-left:12px;
+}
+
+.square-winner{
+  height: 304px;
+  width: 304px;
 }

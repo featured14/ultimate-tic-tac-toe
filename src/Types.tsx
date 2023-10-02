@@ -1,6 +1,6 @@
-export type SquareValue = 'X' | 'O' | null;
+export type SquareValue = string | null;
 
-export type BoardState = 'X' | 'O' | 'DRAW' | null;
+export type BoardState = string | 'DRAW' | null;
 
 export interface SquareProps {
   value: SquareValue;

@@ -3,9 +3,7 @@ import { SquareProps } from './Types';
 
 const Square: React.FC<SquareProps> = ({ value, onClick }) => {
   return (
-    <button className="square" onClick={onClick}>
-      {value}
-    </button>
+    <button className={`square ${value}`} onClick={onClick}></button>
   );
 };
 

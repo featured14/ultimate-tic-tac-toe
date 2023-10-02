@@ -53,7 +53,7 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
       return;
     }
   
-    newBoards[boardIndex][squareIndex] = xIsNext ? 'X' : 'O';
+    newBoards[boardIndex][squareIndex] = xIsNext ? player1 : player2;
     setBoards(newBoards);
   
     const winner = calculateWinner(newBoards[boardIndex]);
@@ -140,16 +140,18 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
         key={boardIndex} 
         className={`
           board-wrapper 
+          board-${boardIndex}
           ${isActive ? 'active-board' : ''} 
           ${isSelected ? 'selected-board' : ''}
         `}
       >
-        <Board
+        {!(isDisabled|| boardStates[boardIndex]==='DRAW') &&  <Board
           squares={boards[boardIndex]}
           onClick={(squareIndex: number) => handleClick(boardIndex, squareIndex)}
           highlight={nextBoard === boardIndex}
           disabled={!!isDisabled}
-        />
+        />}
+        {(isDisabled && boardStates[boardIndex]!=='DRAW') && <div className={`square-winner ${boardStates[boardIndex]?.toString()}`}></div>}
       </div>
     );
   };
