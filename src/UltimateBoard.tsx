@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Board from './Board';
-import { SquareValue, BoardState } from './Types';
+import { SquareValue, BoardState, UltimateBoardProps } from './Types';
 import { useEffect } from 'react';
 
 const calculateWinner = (items: (SquareValue | BoardState)[]): BoardState => {
@@ -31,7 +31,7 @@ const calculateWinner = (items: (SquareValue | BoardState)[]): BoardState => {
 };
 
 
-const UltimateBoard: React.FC = () => {
+const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
   const [boards, setBoards] = useState<SquareValue[][]>(Array(9).fill(null).map(() => Array(9).fill(null)));
   const [nextBoard, setNextBoard] = useState<number | null>(null);
   const [xIsNext, setXIsNext] = useState<boolean>(true);

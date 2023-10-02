@@ -13,3 +13,9 @@ export interface BoardProps {
   highlight: boolean;
   disabled: boolean;
 }
+
+
+export interface UltimateBoardProps {
+  player1: string
+  player2: string
+}
