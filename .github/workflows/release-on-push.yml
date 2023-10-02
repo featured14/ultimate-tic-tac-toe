@@ -1,12 +1,12 @@
-name: Create Release with Zipped Build on Push to Main
+name: Create Release on New Tag
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 jobs:
-  build_and_release:
+  release:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -22,8 +22,6 @@ jobs:
 
     - name: Build React App
       run: npm run build
-      env:
-        CI: false
 
     - name: Zip build folder
       run: zip -r build.zip build/
@@ -31,13 +29,13 @@ jobs:
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.sha }}
-        release_name: Release ${{ github.sha }}
+        tag_name: ${{ github.ref_name }}
+        release_name: Release ${{ github.ref_name }}
         draft: false
         prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Upload Release Asset
       id: upload-release-asset 
