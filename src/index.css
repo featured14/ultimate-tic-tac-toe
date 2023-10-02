@@ -151,54 +151,127 @@ body{
 
 .logos-board-wrapper{
   display: flex;
+}
 
-  .board{
-    width: 360px;
-    margin: 100px;
+.logos-board{
+  width: 448px;
+  margin: 100px;
+}
 
-    .logo-square{
-      width: 120px;
-      height: 120px;
-      font-size: 24px;
-      background: transparent;
-      border: 2px solid #9A96A0;
-      margin: 7px;
-    }
+.logo-square-wrapper{
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 2px solid #9A96A0;
+  margin: 7px;
+}
 
-    .js-logo{
-      background: url('../images/JS.png'), transparent 50% / cover no-repeat;
-    }
+.logo-square{
+  width: 120px;
+  height: 120px;
+  border-color: transparent;
+}
 
-    .ts-logo{
-      background: url('../images/typescript.png'), transparent 50% / cover no-repeat;
-    }
+.player-logo{
+  width: 145px;
+  height: 145px;
+  flex-shrink: 0;
+}
 
-    .react-logo{
-      background: url('../images/react.png'), transparent 50% / cover no-repeat;
-    }
+.js-logo{
+  background: url('../images/JS.png'), transparent 50% / cover;
+  background-repeat: no-repeat;
+}
 
-    .svelte-logo{
-      background: url('../images/svelte.png'), transparent 50% / cover no-repeat;
-    }
+.js-selected{
+  border: none;
+  outline: 6px solid #F7DF1E;
+}
 
-    .angular-logo{
-      background: url('../images/angularjs.png'), transparent 50% / cover no-repeat;
-    }
+.ts-logo{
+  background: url('../images/typescript.png'), transparent 50% / cover;
+  background-repeat: no-repeat;
+}
 
-    .vue-logo{
-      background: url('../images/vue.png'), transparent 50% / cover no-repeat;
-    }
+.ts-selected{
+  border: none;
+  outline:  6px solid #007ACC;
+}
 
-    .aurelia-logo{
-      background: url('../images/aurelia.png'), transparent 50% / cover no-repeat;
-    }
+.react-logo{
+  background: url('../images/react.png'), transparent 50% / cover;
+  background-repeat: no-repeat;
+}
 
-    .node-logo{
-      background: url('../images/node-js.png'), transparent 50% / cover no-repeat;
-    }
+.react-selected{
+  border: none;
+  outline: 6px solid #61DAFB;
+}
 
-    .ember-logo{
-      background: url('../images/ember.png'), transparent 50% / cover no-repeat;
-    }
-  }
+.svelte-logo{
+  background: url('../images/svelte.png'), transparent 50% / cover;
+  background-repeat: no-repeat;
+}
+
+.svelte-selected{
+  border: none;
+  outline: 6px solid #FF5C00;
+}
+
+.angular-logo{
+  background: url('../images/angularjs.png'), transparent 50% / cover ;
+  background-repeat: no-repeat;
+}
+
+.angular-selected{
+  border: none;
+  outline: 6px solid #F00;
+}
+
+.vue-logo{
+  background: url('../images/vue.png'), transparent 50% / cover;
+  background-repeat: no-repeat;
+}
+
+.vue-selected{
+  border: none;
+  outline: 6px solid #29A46A;
+}
+
+.aurelia-logo{
+  background: url('../images/aurelia.png'), transparent 50% / cover ;
+  background-repeat: no-repeat;
+}
+
+.aurelia-selected{
+  border: none;
+  outline: 6px solid #FF37D3;
+}
+
+.node-logo{
+  background: url('../images/node-js.png'), transparent 50% / cover;
+  background-repeat: no-repeat;
+}
+
+.node-selected{
+  border: none;
+  outline: 6px solid #6AF234;
+}
+
+.ember-logo{
+  background: url('../images/ember.png'), transparent 50% / cover;
+  background-repeat: no-repeat;
+}
+
+.ember-selected{
+  border: none;
+  outline: 6px solid #A34F13;
+}
+
+.game-start-timer{
+  margin-bottom: 85px;
+  color:  #fff;
 }

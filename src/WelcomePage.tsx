@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import UltimateBoard from "./UltimateBoard";
 import PlayersSelectPage from "./PlayersSelectPage";
 
 const WelcomePage = () => {
