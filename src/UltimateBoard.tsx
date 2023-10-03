@@ -39,6 +39,8 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
   const [boardStates, setBoardStates] = useState<BoardState[]>(Array(9).fill(null));
   const [ultimateWinner, setUltimateWinner] = useState<BoardState>(null);
   const [selectedBoard, setSelectedBoard] = useState<number | null>(null);
+  const [playerTimer, setPlayerTimer] = useState(7);
+  const [moveExplanation, setMoveExplanation] = useState('Press a button to choose a small board. Each button corresponds to one of the 9 smaller boards.');
 
   const handleClick = (boardIndex: number, squareIndex: number) => {
     if (ultimateWinner) {
@@ -60,7 +62,9 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
     const winner = calculateWinner(newBoards[boardIndex]);
     const newBoardStates = [...boardStates];
     newBoardStates[boardIndex] = winner;
-    setBoardStates(newBoardStates);
+
+   setBoardStates(newBoardStates);
+
   
     let newNextBoard: number | null = squareIndex;
   
@@ -83,11 +87,22 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
       return; // No need to change turns if the game is over
     }
   
-    setXIsNext(!xIsNext);
+    setXIsNext(!xIsNext) 
+    setPlayerTimer(7);
   };
 
 
   useEffect(() => {
+    const countdownTimer = setInterval(() => {
+      setPlayerTimer((prevSeconds) => {
+        if (prevSeconds === 1) {
+          setXIsNext(!xIsNext);
+          return 7;
+        }
+        return prevSeconds - 1;
+      });
+    }, 1000); // Update every 1 second (1000 milliseconds)
+    
     const handleKeyPress = (event: KeyboardEvent) => {
       const keyMap = {
         'q': 0,
@@ -115,10 +130,14 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
         // Logic when any board can be chosen
         if (selectedBoard === null) {
           // Select the board first
+          setMoveExplanation("Press a button to make your move within that board. \n \n Each button corresponds to one of the 9 squares.")
           setSelectedBoard(mappedIndex);
         } else {
           // Now play the square in the selected board
           handleClick(selectedBoard, mappedIndex);
+          if(!boardStates[selectedBoard]){
+            setMoveExplanation('Press a button to choose a small board. Each button corresponds to one of the 9 smaller boards.');
+          }
           setSelectedBoard(null); // Reset the selected board as we've just made a move
         }
       }
@@ -129,8 +148,9 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
     // Cleanup
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
+      clearInterval(countdownTimer);
     };
-  }, [nextBoard, handleClick, selectedBoard]);
+  }, [xIsNext, nextBoard, handleClick, selectedBoard,boardStates]);
 
   const renderBoard = (boardIndex: number) => {
     const isDisabled = boardStates[boardIndex];
@@ -162,10 +182,11 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
     <div>
       <div className={`ultimate-board ${selectedBoard!== null && boardStates[selectedBoard] ===null ? 'has-selected-board': ''}`} >
         <div className="status-bar">
+        <h1 className="player-timer"><span className="hourglass"></span>{playerTimer} sec</h1>
           <h1 className="player-turn">
           Player {xIsNext? 1 : 2} <div className={`player-logo-square ${xIsNext? player1 : player2}`}></div>
           </h1>
-    
+          <h2 className='move-explanation'>{moveExplanation}</h2>
         </div>
         <div className="row">{[0, 1, 2].map(renderBoard)}</div>
         <div className="row">{[3, 4, 5].map(renderBoard)}</div>

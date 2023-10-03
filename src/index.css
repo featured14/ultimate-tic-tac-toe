@@ -110,8 +110,8 @@ body{
   align-items: center;
   color: #fff;
   position: absolute;
-  top: 20px;
-  right: 28px;
+  top: 120px;
+  right: 160px;
 }
 
 .active-board {
@@ -347,7 +347,6 @@ body{
   width: 110px;
   height: 110px;
   background-size: contain;
-  margin-left:12px;
 }
 
 .square-winner{
@@ -424,4 +423,30 @@ body{
   height: 100vh;
   width: 100%;
   position: absolute;
+}
+
+.hourglass{
+  display: block;
+  background-image:url('../images/hourglass.svg');
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 60px;
+}
+
+.player-timer{
+  position: absolute;
+  top: 30px;
+  right: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.move-explanation{
+  width: 250px;
+  position: absolute;
+  color: white;
+  right: 20px;
+  top: 300px;
 }
