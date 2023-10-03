@@ -40,7 +40,7 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
   const [ultimateWinner, setUltimateWinner] = useState<BoardState>(null);
   const [selectedBoard, setSelectedBoard] = useState<number | null>(null);
   const [playerTimer, setPlayerTimer] = useState(7);
-  const [moveExplanation, setMoveExplanation] = useState('Press a button to choose a small board. Each button corresponds to one of the 9 smaller boards.');
+  const [moveExplanation, setMoveExplanation] = useState("Press a button to choose a small board. \n Each button corresponds to one of the 9 smaller boards.");
 
   const handleClick = (boardIndex: number, squareIndex: number) => {
     if (ultimateWinner) {
@@ -76,7 +76,11 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
     if (newNextBoard !== null && newBoardStates[newNextBoard]) {
       newNextBoard = null; // Any board can be picked
     }
-  
+    if(newNextBoard === null){
+      setMoveExplanation("Press a button to choose a small board. \n Each button corresponds to one of the 9 smaller boards.");
+    }else{
+      setMoveExplanation("Press a button to make your move within that board. \n Each button corresponds to one of the 9 squares.");
+    }
     setNextBoard(newNextBoard);
   
     // Check for ultimate winner
@@ -94,6 +98,11 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
 
   useEffect(() => {
     const countdownTimer = setInterval(() => {
+      if(ultimateWinner){
+        setPlayerTimer(0);
+        clearInterval(countdownTimer);
+        return
+      }
       setPlayerTimer((prevSeconds) => {
         if (prevSeconds === 1) {
           setXIsNext(!xIsNext);
@@ -127,20 +136,23 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
         handleClick(nextBoard, mappedIndex);
         setSelectedBoard(null); // Reset the selected board as we've just made a move
       } else {
-        // Logic when any board can be chosen
-        if (selectedBoard === null) {
-          // Select the board first
-          setMoveExplanation("Press a button to make your move within that board. \n \n Each button corresponds to one of the 9 squares.")
-          setSelectedBoard(mappedIndex);
-        } else {
+    
+        if (selectedBoard !== null) {
           // Now play the square in the selected board
           handleClick(selectedBoard, mappedIndex);
-          if(!boardStates[selectedBoard]){
-            setMoveExplanation('Press a button to choose a small board. Each button corresponds to one of the 9 smaller boards.');
-          }
           setSelectedBoard(null); // Reset the selected board as we've just made a move
-        }
+        }else{
+            // Logic when any board can be chosen
+            if ( boardStates[mappedIndex]===null) {
+              // Select the board first
+              setSelectedBoard(mappedIndex);
+              setMoveExplanation("Press a button to make your move within that board. \n Each button corresponds to one of the 9 squares.");    
+            }else{
+              setMoveExplanation("Press a button to choose a small board. \n Each button corresponds to one of the 9 smaller boards.");    
+           
+            }
       }
+    }
     };
 
     window.addEventListener('keydown', handleKeyPress);
@@ -150,7 +162,7 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
       window.removeEventListener('keydown', handleKeyPress);
       clearInterval(countdownTimer);
     };
-  }, [xIsNext, nextBoard, handleClick, selectedBoard,boardStates]);
+  }, [xIsNext, nextBoard, handleClick, selectedBoard,boardStates, ultimateWinner]);
 
   const renderBoard = (boardIndex: number) => {
     const isDisabled = boardStates[boardIndex];
@@ -182,7 +194,7 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
     <div>
       <div className={`ultimate-board ${selectedBoard!== null && boardStates[selectedBoard] ===null ? 'has-selected-board': ''}`} >
         <div className="status-bar">
-        <h1 className="player-timer"><span className="hourglass"></span>{playerTimer} sec</h1>
+        {!ultimateWinner && <h1 className="player-timer"><span className="hourglass"></span>{playerTimer} sec</h1>}
           <h1 className="player-turn">
           Player {xIsNext? 1 : 2} <div className={`player-logo-square ${xIsNext? player1 : player2}`}></div>
           </h1>

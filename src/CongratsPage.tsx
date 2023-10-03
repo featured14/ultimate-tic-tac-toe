@@ -1,19 +1,11 @@
 import { useEffect } from "react";
-import { Fireworks } from 'fireworks-js'
 
 const CongratsPage:  React.FC<{ultimateWinner:string}> = ({ultimateWinner}) => {
 
   useEffect(() => {
-
-    const container = document.querySelector('.fireworks');
-    if(container){
-    const fireworks:Fireworks = new Fireworks(container)
-    fireworks.start();
-    }
-
     const handleKeyPress = () => {
       // Check if any key is pressed (you can specify a particular key if needed)
-      window.location.reload();
+     window.location.reload();
     };
 
     // Add the event listener when the component mounts
@@ -28,7 +20,6 @@ const CongratsPage:  React.FC<{ultimateWinner:string}> = ({ultimateWinner}) => {
 
   return (   
         <div className="congrats-wrapper">
-            <div className="fireworks"></div>
             <div className="congrats-border"></div>
              <div className="congrats-content">
                 <div className="congrats-text">

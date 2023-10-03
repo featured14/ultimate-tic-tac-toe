@@ -11,6 +11,7 @@ body{
   background-image: url('../public/game-bg-2560x1440px.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   line-height: 32px;
 }
 
@@ -171,8 +172,8 @@ body{
 
 /* Welcome page */
 .welcome-page-wrapper{
-  max-width: 55%;
-  margin: 50px auto;
+  max-width: 60%;
+  margin: 40px auto;
 
   .welcome-text{
     display: flex;
@@ -233,6 +234,7 @@ body{
   background-size: cover;
   background-color: transparent;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .js-selected{
@@ -245,6 +247,7 @@ body{
   background-size: cover;
   background-color: transparent;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .ts-selected{
@@ -257,6 +260,7 @@ body{
   background-size: cover;
   background-color: transparent;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .react-selected{
@@ -269,6 +273,7 @@ body{
   background-size: cover;
   background-color: transparent;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .svelte-selected{
@@ -281,6 +286,7 @@ body{
   background-size: cover;
   background-color: transparent;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .angular-selected{
@@ -293,6 +299,7 @@ body{
   background-size: cover;
   background-color: transparent;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .vue-selected{
@@ -305,6 +312,7 @@ body{
   background-size: cover;
   background-color: transparent;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .aurelia-selected{
@@ -317,6 +325,7 @@ body{
   background-size: cover;
   background-color: transparent;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .node-selected{
@@ -329,6 +338,7 @@ body{
   background-size: cover;
   background-color: transparent;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .ember-selected{
@@ -362,6 +372,8 @@ body{
   background: rgba(34, 11, 40, 0.60);
   backdrop-filter: blur(3px);
   top: 0;
+  background-image: url("../images/stars_purple.svg");
+  background-size: contain;
 }
 
 .congrats-tex{
@@ -399,10 +411,11 @@ body{
   align-items: center;
   flex-direction: column;
   width: 800px;
-  margin: 300px auto;
+  margin: 200px auto;
   border: 13px solid #6B3E94;
   padding: 60px 0 55px;
-
+  background-image: url("../images/stars.svg");
+  background-size: contain;
 
   .text-white{
     font-size: 48px;
@@ -415,14 +428,8 @@ body{
   width: 800px;
   position: absolute;
   left: calc(100vw / 2 - 435px);
-  top: 320px;
+  top: 220px;
   border: 13px solid #D04213;
-}
-
-.fireworks{
-  height: 100vh;
-  width: 100%;
-  position: absolute;
 }
 
 .hourglass{
