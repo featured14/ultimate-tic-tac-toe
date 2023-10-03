@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Board from './Board';
 import { SquareValue, BoardState, UltimateBoardProps } from './Types';
 import { useEffect } from 'react';
+import CongratsPage from './CongratsPage';
 
 const calculateWinner = (items: (SquareValue | BoardState)[]): BoardState => {
   const lines = [
@@ -85,6 +86,7 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
     setXIsNext(!xIsNext);
   };
 
+
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       const keyMap = {
@@ -134,7 +136,7 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
     const isDisabled = boardStates[boardIndex];
     const isActive = nextBoard === null ? !isDisabled : boardIndex === nextBoard;
     const isSelected = boardIndex === selectedBoard;
-  
+
     return (
       <div 
         key={boardIndex} 
@@ -156,32 +158,21 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
     );
   };
 
-  const resetGame = () => {
-    setBoards(Array(9).fill(Array(9).fill(null)));
-    setBoardStates(Array(9).fill(null));
-    setNextBoard(null);
-    setXIsNext(true);
-    setUltimateWinner(null);
-    setSelectedBoard(null);
-  };
-
   return (
-    <div className="ultimate-board">
-      <div className="status-bar">
-        <h1 className="player-turn">
-         Player {xIsNext? 1 : 2} <div className={`player-logo-square ${xIsNext? player1 : player2}`}></div>
-        </h1>
-        {ultimateWinner && (
-          <div className="winner-message">
-            Winner is: {ultimateWinner === 'DRAW' ? 'DRAW' : ultimateWinner}
-            <button onClick={resetGame}>Reset Game</button>
-          </div>
-        )}
+    <div>
+      <div className={`ultimate-board ${selectedBoard!== null && boardStates[selectedBoard] ===null ? 'has-selected-board': ''}`} >
+        <div className="status-bar">
+          <h1 className="player-turn">
+          Player {xIsNext? 1 : 2} <div className={`player-logo-square ${xIsNext? player1 : player2}`}></div>
+          </h1>
+    
+        </div>
+        <div className="row">{[0, 1, 2].map(renderBoard)}</div>
+        <div className="row">{[3, 4, 5].map(renderBoard)}</div>
+        <div className="row">{[6, 7, 8].map(renderBoard)}</div>
       </div>
-      <div className="row">{[0, 1, 2].map(renderBoard)}</div>
-      <div className="row">{[3, 4, 5].map(renderBoard)}</div>
-      <div className="row">{[6, 7, 8].map(renderBoard)}</div>
-    </div>
+      {ultimateWinner && ultimateWinner !=='DRAW' && (<CongratsPage ultimateWinner={ultimateWinner?.toString()} />)}
+     </div>
   );
 };
 
