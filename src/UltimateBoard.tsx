@@ -43,6 +43,9 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
   const [playerTimer, setPlayerTimer] = useState(7);
   const [moveExplanation, setMoveExplanation] = useState("Press a button to choose a small board. \n Each button corresponds to one of the 9 smaller boards.");
 
+  const audioToPlay = new Audio('./next_player_effect.mp3');
+    
+
   const handleClick = (boardIndex: number, squareIndex: number) => {
     if (ultimateWinner) {
       return; // If there is an ultimate winner, no more moves should be possible
@@ -105,6 +108,9 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
         return
       }
       setPlayerTimer((prevSeconds) => {
+        if(prevSeconds === 5){
+          audioToPlay.play();
+        }
         if (prevSeconds === 1) {
           setXIsNext(!xIsNext);
           return 7;
