@@ -3,6 +3,7 @@ import Board from './Board';
 import { SquareValue, BoardState, UltimateBoardProps } from './Types';
 import { useEffect } from 'react';
 import CongratsPage from './CongratsPage';
+import EqualityPage from './EqualityPage';
 
 const calculateWinner = (items: (SquareValue | BoardState)[]): BoardState => {
   const lines = [
@@ -136,7 +137,6 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
         handleClick(nextBoard, mappedIndex);
         setSelectedBoard(null); // Reset the selected board as we've just made a move
       } else {
-    
         if (selectedBoard !== null) {
           // Now play the square in the selected board
           handleClick(selectedBoard, mappedIndex);
@@ -146,10 +146,10 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
             if ( boardStates[mappedIndex]===null) {
               // Select the board first
               setSelectedBoard(mappedIndex);
+              setNextBoard(mappedIndex);
               setMoveExplanation("Press a button to make your move within that board. \n Each button corresponds to one of the 9 squares.");    
             }else{
               setMoveExplanation("Press a button to choose a small board. \n Each button corresponds to one of the 9 smaller boards.");    
-           
             }
       }
     }
@@ -179,20 +179,32 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
           ${isSelected ? 'selected-board' : ''}
         `}
       >
-        {!(isDisabled|| boardStates[boardIndex]==='DRAW') &&  <Board
-          squares={boards[boardIndex]}
-          onClick={(squareIndex: number) => handleClick(boardIndex, squareIndex)}
-          highlight={nextBoard === boardIndex}
-          disabled={!!isDisabled}
-        />}
+        {(!isDisabled && boardStates[boardIndex]!=='DRAW') &&  
+          <div className={boardStates[boardIndex] ==='DRAW'? 'hidden':''}>
+            <Board
+              squares={boards[boardIndex]}
+              onClick={(squareIndex: number) => handleClick(boardIndex, squareIndex)}
+              highlight={nextBoard === boardIndex}
+              disabled={!!isDisabled}
+            /></div>}
+
         {(isDisabled && boardStates[boardIndex]!=='DRAW') && <div className={`square-winner ${boardStates[boardIndex]?.toString()}`}></div>}
+
+        {( boardStates[boardIndex]==='DRAW') &&  
+          <Board
+            squares={boards[boardIndex]}
+            onClick={(squareIndex: number) => handleClick(boardIndex, squareIndex)}
+            highlight={nextBoard === boardIndex}
+            disabled={!!isDisabled}
+          />}
+     
       </div>
     );
   };
 
   return (
     <div>
-      <div className={`ultimate-board ${selectedBoard!== null && boardStates[selectedBoard] ===null ? 'has-selected-board': ''}`} >
+      <div className={`ultimate-board ${selectedBoard!== null && boardStates[selectedBoard] === null ? 'has-selected-board': ''}`} >
         <div className="status-bar">
         {!ultimateWinner && <h1 className="player-timer"><span className="hourglass"></span>{playerTimer} sec</h1>}
           <h1 className="player-turn">
@@ -205,6 +217,7 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
         <div className="row">{[6, 7, 8].map(renderBoard)}</div>
       </div>
       {ultimateWinner && ultimateWinner !=='DRAW' && (<CongratsPage ultimateWinner={ultimateWinner?.toString()} />)}
+      {ultimateWinner && ultimateWinner ==='DRAW' && (<EqualityPage />)}
      </div>
   );
 };
