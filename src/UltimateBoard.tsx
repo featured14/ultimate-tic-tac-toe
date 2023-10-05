@@ -81,6 +81,21 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
       newNextBoard = null; // Any board can be picked
     }
     
+    // If any board can be picked, but there's only one left, skip the board picking step
+    if (newNextBoard === null) {
+      for(let i = 0; i < newBoardStates.length; i++){
+        if(!newBoardStates[i]){
+          // If we already found a board that's not disabled, then we can't skip the board picking step
+          if (newNextBoard !== null) {
+            newNextBoard = null;
+            break;
+          }
+
+          newNextBoard = i;
+        }
+      }
+    }
+
     if (newBoardStates.filter(state => !!state).length === 8) {
       newNextBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8].find((i) => !newBoardStates[i]) || null;
     }
