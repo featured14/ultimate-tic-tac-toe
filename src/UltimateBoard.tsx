@@ -42,15 +42,14 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
   const [selectedBoard, setSelectedBoard] = useState<number | null>(null);
   const [playerTimer, setPlayerTimer] = useState(7);
   const [moveExplanation, setMoveExplanation] = useState("Press a button to choose a small board. \n Each button corresponds to one of the 9 smaller boards.");
-
-  const audioToPlay = new Audio('./next_player_effect.mp3');
+  const [audioToPlay,]= useState(new Audio('./next_player_effect.mp3'));
     
 
   const handleClick = (boardIndex: number, squareIndex: number) => {
     if (ultimateWinner) {
       return; // If there is an ultimate winner, no more moves should be possible
     }
-  
+ 
     const newBoards = [...boards];
     const boardState = boardStates[boardIndex];
   
@@ -94,9 +93,14 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
       setUltimateWinner(ultimateWin);
       return; // No need to change turns if the game is over
     }
-  
-    setXIsNext(!xIsNext) 
+
+
+    audioToPlay.pause();
+    audioToPlay.currentTime = 0;
+
+    setXIsNext(!xIsNext);
     setPlayerTimer(7);
+
   };
 
 
@@ -110,6 +114,7 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
       setPlayerTimer((prevSeconds) => {
         if(prevSeconds === 5){
           audioToPlay.play();
+          console.log(audioToPlay)
         }
         if (prevSeconds === 1) {
           setXIsNext(!xIsNext);
@@ -133,11 +138,12 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
       };
     
       const mappedIndex = keyMap[event.key as keyof typeof keyMap];
-    
+       
       if (typeof mappedIndex === 'undefined') {
         return;
       }
     
+
       // Logic when the next board is already decided
       if (nextBoard !== null) {
         handleClick(nextBoard, mappedIndex);
@@ -168,7 +174,7 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
       window.removeEventListener('keydown', handleKeyPress);
       clearInterval(countdownTimer);
     };
-  }, [xIsNext, nextBoard, handleClick, selectedBoard,boardStates, ultimateWinner]);
+  }, [xIsNext, nextBoard, handleClick, selectedBoard,boardStates, ultimateWinner, audioToPlay]);
 
   const renderBoard = (boardIndex: number) => {
     const isDisabled = boardStates[boardIndex];
