@@ -40,7 +40,7 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
   const [boardStates, setBoardStates] = useState<BoardState[]>(Array(9).fill(null));
   const [ultimateWinner, setUltimateWinner] = useState<BoardState>(null);
   const [selectedBoard, setSelectedBoard] = useState<number | null>(null);
-  const [playerTimer, setPlayerTimer] = useState(7);
+  const [playerTimer, setPlayerTimer] = useState(10);
   const [moveExplanation, setMoveExplanation] = useState("Press a button to choose a small board. \n Each button corresponds to one of the 9 smaller boards.");
   const [audioToPlay,]= useState(new Audio('./next_player_effect.mp3'));
     
@@ -99,7 +99,7 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
     audioToPlay.currentTime = 0;
 
     setXIsNext(!xIsNext);
-    setPlayerTimer(7);
+    setPlayerTimer(10);
 
   };
 
@@ -118,7 +118,7 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
         }
         if (prevSeconds === 1) {
           setXIsNext(!xIsNext);
-          return 7;
+          return 10;
         }
         return prevSeconds - 1;
       });
@@ -138,14 +138,23 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
       };
     
       const mappedIndex = keyMap[event.key as keyof typeof keyMap];
-       
+       const availableBoards = boardStates.map((item, index)=>{
+        if(item === null){
+          return index
+        }
+    });
+       console.log('availableBoards',availableBoards)
       if (typeof mappedIndex === 'undefined') {
         return;
       }
     
 
       // Logic when the next board is already decided
-      if (nextBoard !== null) {
+      if(availableBoards.length === 1 &&availableBoards[0]){
+        handleClick(availableBoards[0], mappedIndex);
+        console.log('mappedIndex',mappedIndex)
+        setSelectedBoard(null); 
+      }else if (nextBoard !== null) {
         handleClick(nextBoard, mappedIndex);
         setSelectedBoard(null); // Reset the selected board as we've just made a move
       } else {
