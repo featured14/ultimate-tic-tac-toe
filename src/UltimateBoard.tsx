@@ -53,7 +53,7 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
   
     const newBoards = [...boards];
     const boardState = boardStates[boardIndex];
-  
+
     // If the square or the board is already filled, or if it's not the correct board to play,
     // then don't proceed with the move
     if (newBoards[boardIndex][squareIndex] || boardState || (nextBoard !== null && boardIndex !== nextBoard)) {
@@ -80,6 +80,11 @@ const UltimateBoard: React.FC<UltimateBoardProps> = ({player1, player2}) => {
     if (newNextBoard !== null && newBoardStates[newNextBoard]) {
       newNextBoard = null; // Any board can be picked
     }
+    
+    if (newBoardStates.filter(state => !!state).length === 8) {
+      newNextBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8].find((i) => !newBoardStates[i]) || null;
+    }
+    
     if(newNextBoard === null){
       setMoveExplanation("Press a button to choose a small board. \n Each button corresponds to one of the 9 smaller boards.");
     }else{
